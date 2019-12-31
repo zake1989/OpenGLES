@@ -35,6 +35,15 @@
     return [CAEAGLLayer class];
 }
 
+- (instancetype)initWithVertexName: (NSString *)vName fragmentName: (NSString *)fName {
+    self = [super init];
+    if (self) {
+        self.vertexShader = vName;
+        self.fragmentShader = fName;
+    }
+    return self;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -52,7 +61,7 @@
     [self setupCAEAGLLayer];
     [self destoryRenderAndFrameBuffer];
     [self setupRenderAndFrameBuffer];
-    [self compileShaders];
+    [self compileShadersVertex:self.vertexShader fragment:self.fragmentShader];
 }
 
 - (void)setupGLContext {
@@ -129,9 +138,9 @@
 
 - (void)render {
     [self setClearColor];
-//    [self renderWithColor];
+    [self renderWithColor];
 //    [self renderUsingIndexVBO];
-    [self renderUsingOther];
+//    [self renderUsingOther];
     
     // 将指定renderBuffer渲染在屏幕上
     // 绘制三角形，红色是由fragment shader决定
@@ -141,13 +150,13 @@
     [_eaglContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-- (void)compileShaders {
+- (void)compileShadersVertex:(NSString *)vertexShaderName fragment: (NSString *)fragmentShaderName  {
     
     // 生成一个顶点着色器对象
-    GLuint vertexShader = [self compileShader:@"UniformColorVertex" withType:GL_VERTEX_SHADER];
+    GLuint vertexShader = [self compileShader:vertexShaderName withType:GL_VERTEX_SHADER];
     
     // 生成一个片段着色器对象
-    GLuint fragmentShader = [self compileShader:@"SimpleFragment" withType:GL_FRAGMENT_SHADER];
+    GLuint fragmentShader = [self compileShader:fragmentShaderName withType:GL_FRAGMENT_SHADER];
     
     /*
      调用了glCreateProgram glAttachShader  glLinkProgram 连接 vertex 和 fragment shader成一个完整的program。

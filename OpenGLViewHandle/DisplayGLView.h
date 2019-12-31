@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DisplayGLView : UIView
 
+@property (strong, nonatomic) NSString *vertexShader;
+@property (strong, nonatomic) NSString *fragmentShader;
+
+- (instancetype)initWithVertexName: (NSString *)vName fragmentName: (NSString *)fName;
+
 @end
 
 NS_ASSUME_NONNULL_END

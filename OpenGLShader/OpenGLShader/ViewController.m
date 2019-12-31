@@ -20,7 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.glView = [[DisplayGLView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.glView = [[DisplayGLView alloc] initWithVertexName:@"ColorVertex" fragmentName:@"SimpleFragment"];
+    
+    self.glView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
     [self.view addSubview:self.glView];
     
 }

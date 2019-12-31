@@ -14,11 +14,11 @@
 		454752B123B9DD3F00DEA570 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 454752B023B9DD3F00DEA570 /* Assets.xcassets */; };
 		454752B423B9DD3F00DEA570 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 454752B223B9DD3F00DEA570 /* LaunchScreen.storyboard */; };
 		454752B723B9DD3F00DEA570 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 454752B623B9DD3F00DEA570 /* main.m */; };
-		454752C023B9E6C000DEA570 /* DisplayGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454752BF23B9E6C000DEA570 /* DisplayGLView.m */; };
-		454752C523B9F91600DEA570 /* ColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 454752C223B9F91600DEA570 /* ColorVertex.glsl */; };
-		454752C623B9F91600DEA570 /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 454752C323B9F91600DEA570 /* SimpleFragment.glsl */; };
-		454752C723B9F91600DEA570 /* StaticColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 454752C423B9F91600DEA570 /* StaticColorVertex.glsl */; };
-		454752C923B9FA1B00DEA570 /* UniformColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 454752C823B9FA1B00DEA570 /* UniformColorVertex.glsl */; };
+		4556FEF323BB219C008FB2DC /* DisplayGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4556FEEC23BB219C008FB2DC /* DisplayGLView.m */; };
+		4556FEF423BB219C008FB2DC /* UniformColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4556FEEF23BB219C008FB2DC /* UniformColorVertex.glsl */; };
+		4556FEF523BB219C008FB2DC /* StaticColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4556FEF023BB219C008FB2DC /* StaticColorVertex.glsl */; };
+		4556FEF623BB219C008FB2DC /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4556FEF123BB219C008FB2DC /* SimpleFragment.glsl */; };
+		4556FEF723BB219C008FB2DC /* ColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4556FEF223BB219C008FB2DC /* ColorVertex.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,12 +34,12 @@
 		454752B323B9DD3F00DEA570 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		454752B523B9DD3F00DEA570 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		454752B623B9DD3F00DEA570 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		454752BE23B9E6C000DEA570 /* DisplayGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayGLView.h; sourceTree = "<group>"; };
-		454752BF23B9E6C000DEA570 /* DisplayGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisplayGLView.m; sourceTree = "<group>"; };
-		454752C223B9F91600DEA570 /* ColorVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ColorVertex.glsl; sourceTree = "<group>"; };
-		454752C323B9F91600DEA570 /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
-		454752C423B9F91600DEA570 /* StaticColorVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StaticColorVertex.glsl; sourceTree = "<group>"; };
-		454752C823B9FA1B00DEA570 /* UniformColorVertex.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = UniformColorVertex.glsl; sourceTree = "<group>"; };
+		4556FEEC23BB219C008FB2DC /* DisplayGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayGLView.m; sourceTree = "<group>"; };
+		4556FEED23BB219C008FB2DC /* DisplayGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayGLView.h; sourceTree = "<group>"; };
+		4556FEEF23BB219C008FB2DC /* UniformColorVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UniformColorVertex.glsl; sourceTree = "<group>"; };
+		4556FEF023BB219C008FB2DC /* StaticColorVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StaticColorVertex.glsl; sourceTree = "<group>"; };
+		4556FEF123BB219C008FB2DC /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
+		4556FEF223BB219C008FB2DC /* ColorVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ColorVertex.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +72,7 @@
 		454752A323B9DD3D00DEA570 /* OpenGLShader */ = {
 			isa = PBXGroup;
 			children = (
-				454752BD23B9E15800DEA570 /* OpenGLViewHandle */,
+				4556FEEB23BB219C008FB2DC /* OpenGLViewHandle */,
 				454752A423B9DD3D00DEA570 /* AppDelegate.h */,
 				454752A523B9DD3D00DEA570 /* AppDelegate.m */,
 				454752A723B9DD3D00DEA570 /* SceneDelegate.h */,
@@ -88,23 +88,24 @@
 			path = OpenGLShader;
 			sourceTree = "<group>";
 		};
-		454752BD23B9E15800DEA570 /* OpenGLViewHandle */ = {
+		4556FEEB23BB219C008FB2DC /* OpenGLViewHandle */ = {
 			isa = PBXGroup;
 			children = (
-				454752C123B9F8F900DEA570 /* Shader */,
-				454752BE23B9E6C000DEA570 /* DisplayGLView.h */,
-				454752BF23B9E6C000DEA570 /* DisplayGLView.m */,
+				4556FEEE23BB219C008FB2DC /* Shader */,
+				4556FEED23BB219C008FB2DC /* DisplayGLView.h */,
+				4556FEEC23BB219C008FB2DC /* DisplayGLView.m */,
 			);
-			path = OpenGLViewHandle;
+			name = OpenGLViewHandle;
+			path = ../../OpenGLViewHandle;
 			sourceTree = "<group>";
 		};
-		454752C123B9F8F900DEA570 /* Shader */ = {
+		4556FEEE23BB219C008FB2DC /* Shader */ = {
 			isa = PBXGroup;
 			children = (
-				454752C423B9F91600DEA570 /* StaticColorVertex.glsl */,
-				454752C823B9FA1B00DEA570 /* UniformColorVertex.glsl */,
-				454752C223B9F91600DEA570 /* ColorVertex.glsl */,
-				454752C323B9F91600DEA570 /* SimpleFragment.glsl */,
+				4556FEEF23BB219C008FB2DC /* UniformColorVertex.glsl */,
+				4556FEF023BB219C008FB2DC /* StaticColorVertex.glsl */,
+				4556FEF223BB219C008FB2DC /* ColorVertex.glsl */,
+				4556FEF123BB219C008FB2DC /* SimpleFragment.glsl */,
 			);
 			path = Shader;
 			sourceTree = "<group>";
@@ -166,13 +167,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4556FEF723BB219C008FB2DC /* ColorVertex.glsl in Resources */,
+				4556FEF423BB219C008FB2DC /* UniformColorVertex.glsl in Resources */,
 				454752B423B9DD3F00DEA570 /* LaunchScreen.storyboard in Resources */,
-				454752C523B9F91600DEA570 /* ColorVertex.glsl in Resources */,
 				454752B123B9DD3F00DEA570 /* Assets.xcassets in Resources */,
 				454752AF23B9DD3D00DEA570 /* Main.storyboard in Resources */,
-				454752C623B9F91600DEA570 /* SimpleFragment.glsl in Resources */,
-				454752C723B9F91600DEA570 /* StaticColorVertex.glsl in Resources */,
-				454752C923B9FA1B00DEA570 /* UniformColorVertex.glsl in Resources */,
+				4556FEF523BB219C008FB2DC /* StaticColorVertex.glsl in Resources */,
+				4556FEF623BB219C008FB2DC /* SimpleFragment.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +187,7 @@
 				454752AC23B9DD3D00DEA570 /* ViewController.m in Sources */,
 				454752A623B9DD3D00DEA570 /* AppDelegate.m in Sources */,
 				454752B723B9DD3F00DEA570 /* main.m in Sources */,
-				454752C023B9E6C000DEA570 /* DisplayGLView.m in Sources */,
+				4556FEF323BB219C008FB2DC /* DisplayGLView.m in Sources */,
 				454752A923B9DD3D00DEA570 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
