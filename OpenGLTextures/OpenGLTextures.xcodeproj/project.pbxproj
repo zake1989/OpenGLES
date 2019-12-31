@@ -19,6 +19,7 @@
 		4556FF4C23BB2B96008FB2DC /* StaticColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4556FF4723BB2B96008FB2DC /* StaticColorVertex.glsl */; };
 		4556FF4D23BB2B96008FB2DC /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4556FF4823BB2B96008FB2DC /* SimpleFragment.glsl */; };
 		4556FF4E23BB2B96008FB2DC /* ColorVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4556FF4923BB2B96008FB2DC /* ColorVertex.glsl */; };
+		4556FF5223BB3026008FB2DC /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 4556FF5123BB3026008FB2DC /* texture.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		4556FF4723BB2B96008FB2DC /* StaticColorVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StaticColorVertex.glsl; sourceTree = "<group>"; };
 		4556FF4823BB2B96008FB2DC /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
 		4556FF4923BB2B96008FB2DC /* ColorVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ColorVertex.glsl; sourceTree = "<group>"; };
+		4556FF5123BB3026008FB2DC /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		4556FF2823BB2A5E008FB2DC /* OpenGLTextures */ = {
 			isa = PBXGroup;
 			children = (
+				4556FF5123BB3026008FB2DC /* texture.png */,
 				4556FF4223BB2B96008FB2DC /* OpenGLViewHandle */,
 				4556FF2923BB2A5E008FB2DC /* AppDelegate.h */,
 				4556FF2A23BB2A5E008FB2DC /* AppDelegate.m */,
@@ -91,9 +94,9 @@
 		4556FF4223BB2B96008FB2DC /* OpenGLViewHandle */ = {
 			isa = PBXGroup;
 			children = (
-				4556FF4323BB2B96008FB2DC /* DisplayGLView.m */,
-				4556FF4423BB2B96008FB2DC /* DisplayGLView.h */,
 				4556FF4523BB2B96008FB2DC /* Shader */,
+				4556FF4423BB2B96008FB2DC /* DisplayGLView.h */,
+				4556FF4323BB2B96008FB2DC /* DisplayGLView.m */,
 			);
 			name = OpenGLViewHandle;
 			path = ../../OpenGLViewHandle;
@@ -173,6 +176,7 @@
 				4556FF3623BB2A5F008FB2DC /* Assets.xcassets in Resources */,
 				4556FF3423BB2A5E008FB2DC /* Main.storyboard in Resources */,
 				4556FF4C23BB2B96008FB2DC /* StaticColorVertex.glsl in Resources */,
+				4556FF5223BB3026008FB2DC /* texture.png in Resources */,
 				4556FF4D23BB2B96008FB2DC /* SimpleFragment.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
