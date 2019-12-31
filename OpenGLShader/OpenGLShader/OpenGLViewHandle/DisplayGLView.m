@@ -24,8 +24,6 @@
     CGSize _oldSize;
     
     GLuint _glProgram;
-    GLuint _position;
-    GLuint _color;
 }
 
 @end
@@ -184,8 +182,8 @@
 - (void)renderWithColor {
     
     // 把“顶点属性索引”绑定到“顶点属性名”
-    _position = glGetAttribLocation(_glProgram, "Position");
-    _color = glGetAttribLocation(_glProgram, "SourceColor");
+    GLuint position = glGetAttribLocation(_glProgram, "Position");
+    GLuint color = glGetAttribLocation(_glProgram, "SourceColor");
     
     const GLfloat vertices[] = {
         0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,   // 右上角
@@ -219,13 +217,13 @@
     // 使用VBO时，最后一个参数0为要获取参数在GL_ARRAY_BUFFER中的偏移量
     // 使用glVertexAttribPointer函数告诉OpenGL该如何解析顶点数据
     // 顶点数据
-    glVertexAttribPointer(_position, 3, GL_FLOAT, GL_FALSE, (7* sizeof(float)), 0);
-    glEnableVertexAttribArray(_position);
-    NSLog(@"%u",_position);
+    glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, (7* sizeof(float)), 0);
+    glEnableVertexAttribArray(position);
+    NSLog(@"%u",position);
     // 颜色数据
-    glVertexAttribPointer(_color, 4, GL_FLOAT, GL_FALSE, (7* sizeof(float)), (void*)(3* sizeof(float)));
-    glEnableVertexAttribArray(_color);
-    NSLog(@"%u",_color);
+    glVertexAttribPointer(color, 4, GL_FLOAT, GL_FALSE, (7* sizeof(float)), (void*)(3* sizeof(float)));
+    glEnableVertexAttribArray(color);
+    NSLog(@"%u",color);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
 //    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
