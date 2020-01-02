@@ -40,6 +40,8 @@
     if (self) {
         self.vertexShader = vName;
         self.fragmentShader = fName;
+        [self setupGLContext];
+        [self setupCAEAGLLayer];
     }
     return self;
 }
@@ -57,17 +59,16 @@
 }
 
 - (void)readyGL {
-    [self setupGLContext];
-    [self setupCAEAGLLayer];
     [self destoryRenderAndFrameBuffer];
     [self setupRenderAndFrameBuffer];
     [self compileShadersVertex:self.vertexShader fragment:self.fragmentShader];
 }
 
+#pragma mark - setupCAEAGLContext
+
 - (void)setupGLContext {
     // 初始化渲染上下文，管理所有绘制的状态，命令及资源信息。
     _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3]; //opengl es 3.0
-    
     //设置为当前上下文
     [EAGLContext setCurrentContext:_eaglContext];
 }
@@ -91,6 +92,8 @@
                                      kEAGLColorFormatRGBA8,
                                      kEAGLDrawablePropertyColorFormat, nil];
 }
+
+#pragma mark - handleBuffer
 
 - (void)destoryRenderAndFrameBuffer {
     // 销毁渲染区和帧缓冲区
@@ -128,10 +131,10 @@
 
 - (void)setClearColor {
     // 设置清屏颜色
-    glClearColor(0.3f, 1.0f, 0.5f, 0.3f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     // 用来指定要用清屏颜色来清除由mask指定的buffer，此处是color buffer
     glClear(GL_COLOR_BUFFER_BIT);
-    
+    // 设置显示大小
     glViewport(0, 0, self.frame.size.width, self.frame.size.height);
 }
 
