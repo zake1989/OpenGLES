@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "DisplayGLView.h"
 
 @interface ViewController ()
+
+@property (strong, nonatomic) DisplayGLView *glView;
 
 @end
 
@@ -17,8 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.glView = [[DisplayGLView alloc] initWithVertexName:@"TextureVertex" fragmentName:@"TextureFragment"];
     
+    self.glView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     
+    [self.view addSubview:self.glView];
 }
 
 - (CGImageRef)fetchImage {

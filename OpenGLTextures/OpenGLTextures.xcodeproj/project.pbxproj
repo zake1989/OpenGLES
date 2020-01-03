@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		454A822A23BEDA3E004523A5 /* TextureVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 454A822923BEDA3E004523A5 /* TextureVertex.glsl */; };
+		454A822E23BEDB1A004523A5 /* TextureFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 454A822D23BEDB1A004523A5 /* TextureFragment.glsl */; };
+		454A823023BF0FD1004523A5 /* texture2.png in Resources */ = {isa = PBXBuildFile; fileRef = 454A822F23BF0FD1004523A5 /* texture2.png */; };
 		4556FF2B23BB2A5E008FB2DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4556FF2A23BB2A5E008FB2DC /* AppDelegate.m */; };
 		4556FF2E23BB2A5E008FB2DC /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4556FF2D23BB2A5E008FB2DC /* SceneDelegate.m */; };
 		4556FF3123BB2A5E008FB2DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4556FF3023BB2A5E008FB2DC /* ViewController.m */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		454A822923BEDA3E004523A5 /* TextureVertex.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextureVertex.glsl; sourceTree = "<group>"; };
+		454A822D23BEDB1A004523A5 /* TextureFragment.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextureFragment.glsl; sourceTree = "<group>"; };
+		454A822F23BF0FD1004523A5 /* texture2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture2.png; sourceTree = "<group>"; };
 		4556FF2623BB2A5E008FB2DC /* OpenGLTextures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGLTextures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4556FF2923BB2A5E008FB2DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4556FF2A23BB2A5E008FB2DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -74,6 +80,7 @@
 		4556FF2823BB2A5E008FB2DC /* OpenGLTextures */ = {
 			isa = PBXGroup;
 			children = (
+				454A822F23BF0FD1004523A5 /* texture2.png */,
 				4556FF5123BB3026008FB2DC /* texture.png */,
 				4556FF4223BB2B96008FB2DC /* OpenGLViewHandle */,
 				4556FF2923BB2A5E008FB2DC /* AppDelegate.h */,
@@ -107,8 +114,10 @@
 			children = (
 				4556FF4623BB2B96008FB2DC /* UniformColorVertex.glsl */,
 				4556FF4723BB2B96008FB2DC /* StaticColorVertex.glsl */,
-				4556FF4823BB2B96008FB2DC /* SimpleFragment.glsl */,
 				4556FF4923BB2B96008FB2DC /* ColorVertex.glsl */,
+				4556FF4823BB2B96008FB2DC /* SimpleFragment.glsl */,
+				454A822923BEDA3E004523A5 /* TextureVertex.glsl */,
+				454A822D23BEDB1A004523A5 /* TextureFragment.glsl */,
 			);
 			path = Shader;
 			sourceTree = "<group>";
@@ -171,11 +180,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4556FF4E23BB2B96008FB2DC /* ColorVertex.glsl in Resources */,
+				454A823023BF0FD1004523A5 /* texture2.png in Resources */,
+				454A822A23BEDA3E004523A5 /* TextureVertex.glsl in Resources */,
 				4556FF4B23BB2B96008FB2DC /* UniformColorVertex.glsl in Resources */,
 				4556FF3923BB2A5F008FB2DC /* LaunchScreen.storyboard in Resources */,
 				4556FF3623BB2A5F008FB2DC /* Assets.xcassets in Resources */,
 				4556FF3423BB2A5E008FB2DC /* Main.storyboard in Resources */,
 				4556FF4C23BB2B96008FB2DC /* StaticColorVertex.glsl in Resources */,
+				454A822E23BEDB1A004523A5 /* TextureFragment.glsl in Resources */,
 				4556FF5223BB3026008FB2DC /* texture.png in Resources */,
 				4556FF4D23BB2B96008FB2DC /* SimpleFragment.glsl in Resources */,
 			);

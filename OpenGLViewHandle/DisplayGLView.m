@@ -19,6 +19,9 @@
     GLuint _renderBuffer;
     // framebuffer指针
     GLuint _frameBuffer;
+    // 纹理
+    GLuint leftTexture;
+    GLuint rightTexture;
     
     // size修正 UI层适配
     CGSize _oldSize;
@@ -62,6 +65,30 @@
     [self destoryRenderAndFrameBuffer];
     [self setupRenderAndFrameBuffer];
     [self compileShadersVertex:self.vertexShader fragment:self.fragmentShader];
+    
+    CGImageRef leftImageRef = [self fetchImageWith:@"texture"];
+    int leftWidth = (int)CGImageGetWidth(leftImageRef);
+    int leftHeight = (int)CGImageGetHeight(leftImageRef);
+    
+    GLubyte *leftData = [self createTextureDataWith:leftImageRef
+                                         imageWidth:leftWidth
+                                        imageHeight:leftHeight];
+    
+    leftTexture = [self createTextureWith:leftData
+                                      imageWidth:leftWidth
+                                     imageHeight:leftHeight];
+    
+    CGImageRef rightImageRef = [self fetchImageWith:@"texture2"];
+    int rightWidth = (int)CGImageGetWidth(rightImageRef);
+    int rightHeight = (int)CGImageGetHeight(rightImageRef);
+    
+    GLubyte *rightData = [self createTextureDataWith:rightImageRef
+                                          imageWidth:rightWidth
+                                         imageHeight:rightHeight];
+    
+    rightTexture = [self createTextureWith:rightData
+                                      imageWidth:rightWidth
+                                     imageHeight:rightHeight];
 }
 
 #pragma mark - setupCAEAGLContext
@@ -141,10 +168,10 @@
 
 - (void)render {
     [self setClearColor];
-    [self renderWithColor];
+//    [self renderWithColor];
 //    [self renderUsingIndexVBO];
 //    [self renderUsingOther];
-    
+    [self renderWithTexture];
     // 将指定renderBuffer渲染在屏幕上
     // 绘制三角形，红色是由fragment shader决定
     // 从FBO中读取图像数据，离屏渲染。
@@ -189,7 +216,93 @@
     
     // 调用 glUseProgram绑定程序对象 让OpenGL ES真正执行你的program进行渲染
     glUseProgram(_glProgram);
+    
+    GLuint leftTextureLocation = glGetUniformLocation(_glProgram, "leftImageTexture");
+    GLuint rightTextureLocation = glGetUniformLocation(_glProgram, "rightImageTexture");
+    glUniform1i(leftTextureLocation, 0);
+    glUniform1i(rightTextureLocation, 1);
 }
+
+- (GLuint)createTextureWith:(GLubyte *)data imageWidth:(int)width imageHeight:(int)height {
+    // 纹理指针
+    GLuint texture;
+    // 创建一个texture对象
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    // 绑定texture对象
+//    glBindTexture(GL_TEXTURE_2D, texture);
+    // 纹理适应方式设置 wrapping: GL_REPEAT  GL_MIRRORED_REPEAT  GL_CLAMP_TO_EDGE  GL_CLAMP_TO_BORDER
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // 纹理缩放方式设置 filtering: GL_LINEAR  GL_NEAREST
+    // Mipmaps: GL_NEAREST_MIPMAP_NEAREST  GL_LINEAR_MIPMAP_NEAREST  GL_NEAREST_MIPMAP_LINEAR  GL_LINEAR_MIPMAP_LINEAR
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    //
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    return texture;
+}
+
+- (void)renderWithTexture {
+    
+    // 把“顶点属性索引”绑定到“顶点属性名”
+    GLuint position = glGetAttribLocation(_glProgram, "Position");
+    GLuint color = glGetAttribLocation(_glProgram, "SourceColor");
+    GLuint texturePositon = glGetAttribLocation(_glProgram, "TextureCoord");
+    
+    const GLfloat vertices[] = {
+        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,   // 右上角
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,  // 右下角
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, // 左下角
+        -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f   // 左上角
+    };
+    
+    const GLubyte indices[] = {
+        0,1,3,   // 绘制第一个三角形
+        1,2,3    // 绘制第二个三角形
+    };
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, leftTexture);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, rightTexture);
+    
+    // 创建一个渲染缓冲区对象
+    GLuint vertexBuffer;
+    // 使用glGenBuffers()生成新缓存对象并指定缓存对象标识符ID
+    glGenBuffers(1, &vertexBuffer);
+    
+    // 绑定vertexBuffer到GL_ARRAY_BUFFER目标
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    
+    // 为VBO申请空间，初始化并传递数据
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    
+    GLuint indexBuffer;
+    glGenBuffers(1, &indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    
+    // 使用VBO时，最后一个参数0为要获取参数在GL_ARRAY_BUFFER中的偏移量
+    // 使用glVertexAttribPointer函数告诉OpenGL该如何解析顶点数据
+    // 顶点数据
+    glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, (9* sizeof(float)), 0);
+    glEnableVertexAttribArray(position);
+    NSLog(@"%u",position);
+    // 颜色数据
+    glVertexAttribPointer(color, 4, GL_FLOAT, GL_FALSE, (9* sizeof(float)), (void*)(3* sizeof(float)));
+    glEnableVertexAttribArray(color);
+    NSLog(@"%u",color);
+    // 纹理数据
+    glVertexAttribPointer(texturePositon, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(7 * sizeof(float)));
+    glEnableVertexAttribArray(texturePositon);
+    NSLog(@"%u",texturePositon);
+    
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
+//    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
 
 - (void)renderWithColor {
     
@@ -350,7 +463,7 @@
     if (compileSuccess == GL_FALSE) {
         GLchar messages[256];
         NSString *messageString = [NSString stringWithUTF8String:messages];
-        NSLog(@"生成着色器对象:%@", messageString);
+        NSLog(@"生成着色器对象:%@ -- %@", messageString, shaderName);
         exit(1);
     }
     
@@ -358,6 +471,27 @@
     return shader;
 }
 
+- (CGImageRef)fetchImageWith:(NSString *)imageName {
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
+    UIImage* image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
+    return [image CGImage];
+}
 
+- (GLubyte *)createTextureDataWith: (CGImageRef) imageRef imageWidth:(int)width imageHeight:(int)height {
+    GLubyte* textureData = (GLubyte *)malloc(width * height * 4); // if 4 components per pixel (RGBA)
+
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    NSUInteger bytesPerPixel = 4;
+    NSUInteger bytesPerRow = bytesPerPixel * width;
+    NSUInteger bitsPerComponent = 8;
+    CGContextRef context = CGBitmapContextCreate(textureData, width, height,
+                                                 bitsPerComponent, bytesPerRow, colorSpace,
+                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    
+    CGColorSpaceRelease(colorSpace);
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+    CGContextRelease(context);
+    return textureData;
+}
 
 @end
